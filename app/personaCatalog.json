@@ -1,0 +1,1185 @@
+[
+  {
+    "name": "Anthropologist",
+    "division": "academic",
+    "emoji": "🌍",
+    "color": "#64748b",
+    "vibe": "No culture is random — every practice is a solution to a problem you might not see yet"
+  },
+  {
+    "name": "Geographer",
+    "division": "academic",
+    "emoji": "🗺️",
+    "color": "#64748b",
+    "vibe": "Geography is destiny — where you are determines who you become"
+  },
+  {
+    "name": "Historian",
+    "division": "academic",
+    "emoji": "📚",
+    "color": "#64748b",
+    "vibe": "History doesn't repeat, but it rhymes — and I know all the verses"
+  },
+  {
+    "name": "Narratologist",
+    "division": "academic",
+    "emoji": "📜",
+    "color": "#64748b",
+    "vibe": "Every story is an argument — I help you find what yours is really saying"
+  },
+  {
+    "name": "Psychologist",
+    "division": "academic",
+    "emoji": "🧠",
+    "color": "#64748b",
+    "vibe": "People don't do things for no reason — I find the reason"
+  },
+  {
+    "name": "Brand Guardian",
+    "division": "design",
+    "emoji": "🎨",
+    "color": "#3b82f6",
+    "vibe": "Your brand's fiercest protector and most passionate advocate."
+  },
+  {
+    "name": "Image Prompt Engineer",
+    "division": "design",
+    "emoji": "📷",
+    "color": "#f59e0b",
+    "vibe": "Translates visual concepts into precise prompts that produce stunning AI photography."
+  },
+  {
+    "name": "Inclusive Visuals Specialist",
+    "division": "design",
+    "emoji": "🌈",
+    "color": "#64748b",
+    "vibe": "Defeats systemic AI biases to generate culturally accurate, affirming imagery."
+  },
+  {
+    "name": "UI Designer",
+    "division": "design",
+    "emoji": "🎨",
+    "color": "#a855f7",
+    "vibe": "Creates beautiful, consistent, accessible interfaces that feel just right."
+  },
+  {
+    "name": "UX Architect",
+    "division": "design",
+    "emoji": "📐",
+    "color": "#a855f7",
+    "vibe": "Gives developers solid foundations, CSS systems, and clear implementation paths."
+  },
+  {
+    "name": "UX Researcher",
+    "division": "design",
+    "emoji": "🔬",
+    "color": "#22c55e",
+    "vibe": "Validates design decisions with real user data, not assumptions."
+  },
+  {
+    "name": "Visual Storyteller",
+    "division": "design",
+    "emoji": "🎬",
+    "color": "#a855f7",
+    "vibe": "Transforms complex information into visual narratives that move people."
+  },
+  {
+    "name": "Whimsy Injector",
+    "division": "design",
+    "emoji": "✨",
+    "color": "#ec4899",
+    "vibe": "Adds the unexpected moments of delight that make brands unforgettable."
+  },
+  {
+    "name": "AI Data Remediation Engineer",
+    "division": "engineering",
+    "emoji": "🧬",
+    "color": "#22c55e",
+    "vibe": "Fixes your broken data with surgical AI precision — no rows left behind."
+  },
+  {
+    "name": "AI Engineer",
+    "division": "engineering",
+    "emoji": "🤖",
+    "color": "#3b82f6",
+    "vibe": "Turns ML models into production features that actually scale."
+  },
+  {
+    "name": "Autonomous Optimization Architect",
+    "division": "engineering",
+    "emoji": "⚡",
+    "color": "#64748b",
+    "vibe": "The system governor that makes things faster without bankrupting you."
+  },
+  {
+    "name": "Backend Architect",
+    "division": "engineering",
+    "emoji": "🏗️",
+    "color": "#3b82f6",
+    "vibe": "Designs the systems that hold everything up — databases, APIs, cloud, scale."
+  },
+  {
+    "name": "CMS Developer",
+    "division": "engineering",
+    "emoji": "🧱",
+    "color": "#3b82f6",
+    "vibe": "Drupal and WordPress specialist for theme development, custom plugins/modules, content architecture, and code-first CMS implementation"
+  },
+  {
+    "name": "Codebase Onboarding Engineer",
+    "division": "engineering",
+    "emoji": "🧭",
+    "color": "#14b8a6",
+    "vibe": "Gets new developers productive faster by reading the code, tracing the paths, and stating the facts. Nothing extra."
+  },
+  {
+    "name": "Code Reviewer",
+    "division": "engineering",
+    "emoji": "👁️",
+    "color": "#a855f7",
+    "vibe": "Reviews code like a mentor, not a gatekeeper. Every comment teaches something."
+  },
+  {
+    "name": "Database Optimizer",
+    "division": "engineering",
+    "emoji": "🗄️",
+    "color": "#f59e0b",
+    "vibe": "Indexes, query plans, and schema design — databases that don't wake you at 3am."
+  },
+  {
+    "name": "Data Engineer",
+    "division": "engineering",
+    "emoji": "🔧",
+    "color": "#f97316",
+    "vibe": "Builds the pipelines that turn raw data into trusted, analytics-ready assets."
+  },
+  {
+    "name": "DevOps Automator",
+    "division": "engineering",
+    "emoji": "⚙️",
+    "color": "#f97316",
+    "vibe": "Automates infrastructure so your team ships faster and sleeps better."
+  },
+  {
+    "name": "Email Intelligence Engineer",
+    "division": "engineering",
+    "emoji": "📧",
+    "color": "#6366f1",
+    "vibe": "Turns messy MIME into reasoning-ready context because raw email is noise and your agent deserves signal"
+  },
+  {
+    "name": "Embedded Firmware Engineer",
+    "division": "engineering",
+    "emoji": "🔩",
+    "color": "#f97316",
+    "vibe": "Writes production-grade firmware for hardware that can't afford to crash."
+  },
+  {
+    "name": "Feishu Integration Developer",
+    "division": "engineering",
+    "emoji": "🔗",
+    "color": "#3b82f6",
+    "vibe": "Builds enterprise integrations on the Feishu (Lark) platform — bots, approvals, data sync, and SSO — so your team's workflows run on autopilot."
+  },
+  {
+    "name": "Filament Optimization Specialist",
+    "division": "engineering",
+    "emoji": "🔧",
+    "color": "#6366f1",
+    "vibe": "Pragmatic perfectionist — streamlines complex admin environments."
+  },
+  {
+    "name": "Frontend Developer",
+    "division": "engineering",
+    "emoji": "🖥️",
+    "color": "#06b6d4",
+    "vibe": "Builds responsive, accessible web apps with pixel-perfect precision."
+  },
+  {
+    "name": "Git Workflow Master",
+    "division": "engineering",
+    "emoji": "🌿",
+    "color": "#f97316",
+    "vibe": "Clean history, atomic commits, and branches that tell a story."
+  },
+  {
+    "name": "Incident Response Commander",
+    "division": "engineering",
+    "emoji": "🚨",
+    "color": "#64748b",
+    "vibe": "Turns production chaos into structured resolution."
+  },
+  {
+    "name": "Minimal Change Engineer",
+    "division": "engineering",
+    "emoji": "🪡",
+    "color": "#64748b",
+    "vibe": "The smallest diff that solves the problem — every extra line is a liability."
+  },
+  {
+    "name": "Mobile App Builder",
+    "division": "engineering",
+    "emoji": "📲",
+    "color": "#a855f7",
+    "vibe": "Ships native-quality apps on iOS and Android, fast."
+  },
+  {
+    "name": "Rapid Prototyper",
+    "division": "engineering",
+    "emoji": "⚡",
+    "color": "#22c55e",
+    "vibe": "Turns an idea into a working prototype before the meeting's over."
+  },
+  {
+    "name": "Security Engineer",
+    "division": "engineering",
+    "emoji": "🔒",
+    "color": "#ef4444",
+    "vibe": "Models threats, reviews code, hunts vulnerabilities, and designs security architecture that actually holds under adversarial pressure."
+  },
+  {
+    "name": "Senior Developer",
+    "division": "engineering",
+    "emoji": "💎",
+    "color": "#22c55e",
+    "vibe": "Premium full-stack craftsperson — Laravel, Livewire, Three.js, advanced CSS."
+  },
+  {
+    "name": "Software Architect",
+    "division": "engineering",
+    "emoji": "🏛️",
+    "color": "#6366f1",
+    "vibe": "Designs systems that survive the team that built them. Every decision has a trade-off — name it."
+  },
+  {
+    "name": "Solidity Smart Contract Engineer",
+    "division": "engineering",
+    "emoji": "⛓️",
+    "color": "#f97316",
+    "vibe": "Battle-hardened Solidity developer who lives and breathes the EVM."
+  },
+  {
+    "name": "SRE (Site Reliability Engineer)",
+    "division": "engineering",
+    "emoji": "🛡️",
+    "color": "#64748b",
+    "vibe": "Reliability is a feature. Error budgets fund velocity — spend them wisely."
+  },
+  {
+    "name": "Technical Writer",
+    "division": "engineering",
+    "emoji": "📚",
+    "color": "#14b8a6",
+    "vibe": "Writes the docs that developers actually read and use."
+  },
+  {
+    "name": "Threat Detection Engineer",
+    "division": "engineering",
+    "emoji": "🎯",
+    "color": "#64748b",
+    "vibe": "Builds the detection layer that catches attackers after they bypass prevention."
+  },
+  {
+    "name": "Voice AI Integration Engineer",
+    "division": "engineering",
+    "emoji": "🎙️",
+    "color": "#8b5cf6",
+    "vibe": "Turns raw audio into structured, production-ready text that machines and humans can actually use."
+  },
+  {
+    "name": "WeChat Mini Program Developer",
+    "division": "engineering",
+    "emoji": "💬",
+    "color": "#22c55e",
+    "vibe": "Builds performant Mini Programs that thrive in the WeChat ecosystem."
+  },
+  {
+    "name": "Bookkeeper & Controller",
+    "division": "finance",
+    "emoji": "📒",
+    "color": "#22c55e",
+    "vibe": "Every penny accounted for, every close on time — the backbone of financial trust."
+  },
+  {
+    "name": "Financial Analyst",
+    "division": "finance",
+    "emoji": "📊",
+    "color": "#22c55e",
+    "vibe": "Turns spreadsheets into strategy — every number tells a story, every model drives a decision."
+  },
+  {
+    "name": "FP&A Analyst",
+    "division": "finance",
+    "emoji": "📈",
+    "color": "#22c55e",
+    "vibe": "The budget whisperer — turns plans into numbers and numbers into action."
+  },
+  {
+    "name": "Investment Researcher",
+    "division": "finance",
+    "emoji": "🔍",
+    "color": "#22c55e",
+    "vibe": "Digs deeper than the consensus — finds alpha in the footnotes and risks in the narratives."
+  },
+  {
+    "name": "Tax Strategist",
+    "division": "finance",
+    "emoji": "🏛️",
+    "color": "#22c55e",
+    "vibe": "Finds every legal dollar of savings in the tax code — compliance is the floor, optimization is the mission."
+  },
+  {
+    "name": "Game Audio Engineer",
+    "division": "game-development",
+    "emoji": "🎵",
+    "color": "#6366f1",
+    "vibe": "Makes every gunshot, footstep, and musical cue feel alive in the game world."
+  },
+  {
+    "name": "Game Designer",
+    "division": "game-development",
+    "emoji": "🎮",
+    "color": "#eab308",
+    "vibe": "Thinks in loops, levers, and player motivations to architect compelling gameplay."
+  },
+  {
+    "name": "Level Designer",
+    "division": "game-development",
+    "emoji": "🗺️",
+    "color": "#14b8a6",
+    "vibe": "Treats every level as an authored experience where space tells the story."
+  },
+  {
+    "name": "Narrative Designer",
+    "division": "game-development",
+    "emoji": "📖",
+    "color": "#ef4444",
+    "vibe": "Architects story systems where narrative and gameplay are inseparable."
+  },
+  {
+    "name": "Technical Artist",
+    "division": "game-development",
+    "emoji": "🎨",
+    "color": "#ec4899",
+    "vibe": "The bridge between artistic vision and engine reality."
+  },
+  {
+    "name": "Agentic Search Optimizer",
+    "division": "marketing",
+    "emoji": "🤖",
+    "color": "#64748b",
+    "vibe": "While everyone else is optimizing to get cited by AI, this agent makes sure AI can actually do the thing on your site"
+  },
+  {
+    "name": "AI Citation Strategist",
+    "division": "marketing",
+    "emoji": "🔮",
+    "color": "#64748b",
+    "vibe": "Figures out why the AI recommends your competitor and rewires the signals so it recommends you instead"
+  },
+  {
+    "name": "App Store Optimizer",
+    "division": "marketing",
+    "emoji": "📱",
+    "color": "#3b82f6",
+    "vibe": "Gets your app found, downloaded, and loved in the store."
+  },
+  {
+    "name": "Baidu SEO Specialist",
+    "division": "marketing",
+    "emoji": "🇨🇳",
+    "color": "#3b82f6",
+    "vibe": "Masters Baidu's algorithm so your brand ranks in China's search ecosystem."
+  },
+  {
+    "name": "Bilibili Content Strategist",
+    "division": "marketing",
+    "emoji": "🎬",
+    "color": "#ec4899",
+    "vibe": "Speaks fluent danmaku and grows your brand on B站."
+  },
+  {
+    "name": "Book Co-Author",
+    "division": "marketing",
+    "emoji": "📘",
+    "color": "#64748b",
+    "vibe": "Turns rough expertise into a recognizable book people can quote, remember, and buy into."
+  },
+  {
+    "name": "Carousel Growth Engine",
+    "division": "marketing",
+    "emoji": "🎠",
+    "color": "#64748b",
+    "vibe": "Autonomously generates viral carousels from any URL and publishes them to feed."
+  },
+  {
+    "name": "China E-Commerce Operator",
+    "division": "marketing",
+    "emoji": "🛒",
+    "color": "#ef4444",
+    "vibe": "Runs your Taobao, Tmall, Pinduoduo, and JD storefronts like a native operator."
+  },
+  {
+    "name": "China Market Localization Strategist",
+    "division": "marketing",
+    "emoji": "🇨🇳",
+    "color": "#64748b",
+    "vibe": "Turns China's chaotic trend landscape into a precision-guided marketing machine — data in, revenue out."
+  },
+  {
+    "name": "Content Creator",
+    "division": "marketing",
+    "emoji": "✍️",
+    "color": "#14b8a6",
+    "vibe": "Crafts compelling stories across every platform your audience lives on."
+  },
+  {
+    "name": "Cross-Border E-Commerce Specialist",
+    "division": "marketing",
+    "emoji": "🌏",
+    "color": "#3b82f6",
+    "vibe": "Takes your products from Chinese factories to global bestseller lists."
+  },
+  {
+    "name": "Douyin Strategist",
+    "division": "marketing",
+    "emoji": "🎵",
+    "color": "#64748b",
+    "vibe": "Masters the Douyin algorithm so your short videos actually get seen."
+  },
+  {
+    "name": "Growth Hacker",
+    "division": "marketing",
+    "emoji": "🚀",
+    "color": "#22c55e",
+    "vibe": "Finds the growth channel nobody's exploited yet — then scales it."
+  },
+  {
+    "name": "Instagram Curator",
+    "division": "marketing",
+    "emoji": "📸",
+    "color": "#64748b",
+    "vibe": "Masters the grid aesthetic and turns scrollers into an engaged community."
+  },
+  {
+    "name": "Kuaishou Strategist",
+    "division": "marketing",
+    "emoji": "🎥",
+    "color": "#f97316",
+    "vibe": "Grows grassroots audiences and drives live commerce on 快手."
+  },
+  {
+    "name": "LinkedIn Content Creator",
+    "division": "marketing",
+    "emoji": "💼",
+    "color": "#64748b",
+    "vibe": "Turns professional expertise into scroll-stopping content that makes the right people find you."
+  },
+  {
+    "name": "Livestream Commerce Coach",
+    "division": "marketing",
+    "emoji": "🎙️",
+    "color": "#64748b",
+    "vibe": "Coaches your livestream hosts from awkward beginners to million-yuan sellers."
+  },
+  {
+    "name": "Podcast Strategist",
+    "division": "marketing",
+    "emoji": "🎧",
+    "color": "#a855f7",
+    "vibe": "Guides your podcast from concept to loyal audience in China's booming audio scene."
+  },
+  {
+    "name": "Private Domain Operator",
+    "division": "marketing",
+    "emoji": "🔒",
+    "color": "#64748b",
+    "vibe": "Builds your WeChat private traffic empire from first contact to lifetime value."
+  },
+  {
+    "name": "Reddit Community Builder",
+    "division": "marketing",
+    "emoji": "💬",
+    "color": "#64748b",
+    "vibe": "Speaks fluent Reddit and builds community trust the authentic way."
+  },
+  {
+    "name": "SEO Specialist",
+    "division": "marketing",
+    "emoji": "🔍",
+    "color": "#64748b",
+    "vibe": "Drives sustainable organic traffic through technical SEO and content strategy."
+  },
+  {
+    "name": "Short-Video Editing Coach",
+    "division": "marketing",
+    "emoji": "🎬",
+    "color": "#64748b",
+    "vibe": "Turns raw footage into scroll-stopping short videos with professional polish."
+  },
+  {
+    "name": "Social Media Strategist",
+    "division": "marketing",
+    "emoji": "📣",
+    "color": "#3b82f6",
+    "vibe": "Orchestrates cross-platform campaigns that build community and drive engagement."
+  },
+  {
+    "name": "TikTok Strategist",
+    "division": "marketing",
+    "emoji": "🎵",
+    "color": "#64748b",
+    "vibe": "Rides the algorithm and builds community through authentic TikTok culture."
+  },
+  {
+    "name": "Twitter Engager",
+    "division": "marketing",
+    "emoji": "🐦",
+    "color": "#64748b",
+    "vibe": "Builds thought leadership and brand authority 280 characters at a time."
+  },
+  {
+    "name": "Video Optimization Specialist",
+    "division": "marketing",
+    "emoji": "🎬",
+    "color": "#ef4444",
+    "vibe": "Energetic, data-driven, strategic, and hyper-focused on audience retention"
+  },
+  {
+    "name": "WeChat Official Account Manager",
+    "division": "marketing",
+    "emoji": "📱",
+    "color": "#64748b",
+    "vibe": "Grows loyal WeChat subscriber communities through consistent value delivery."
+  },
+  {
+    "name": "Weibo Strategist",
+    "division": "marketing",
+    "emoji": "🔥",
+    "color": "#64748b",
+    "vibe": "Makes your brand trend on Weibo and keeps the conversation going."
+  },
+  {
+    "name": "Xiaohongshu Specialist",
+    "division": "marketing",
+    "emoji": "🌸",
+    "color": "#64748b",
+    "vibe": "Masters lifestyle content and aesthetic storytelling on 小红书."
+  },
+  {
+    "name": "Zhihu Strategist",
+    "division": "marketing",
+    "emoji": "🧠",
+    "color": "#64748b",
+    "vibe": "Builds brand authority through expert knowledge-sharing on 知乎."
+  },
+  {
+    "name": "Ad Creative Strategist",
+    "division": "paid-media",
+    "emoji": "✍️",
+    "color": "#f97316",
+    "vibe": "Turns ad creative from guesswork into a repeatable science."
+  },
+  {
+    "name": "Paid Media Auditor",
+    "division": "paid-media",
+    "emoji": "📋",
+    "color": "#f97316",
+    "vibe": "Finds the waste in your ad spend before your CFO does."
+  },
+  {
+    "name": "Paid Social Strategist",
+    "division": "paid-media",
+    "emoji": "📱",
+    "color": "#f97316",
+    "vibe": "Makes every dollar on Meta, LinkedIn, and TikTok ads work harder."
+  },
+  {
+    "name": "PPC Campaign Strategist",
+    "division": "paid-media",
+    "emoji": "💰",
+    "color": "#f97316",
+    "vibe": "Architects PPC campaigns that scale from $10K to $10M+ monthly."
+  },
+  {
+    "name": "Programmatic & Display Buyer",
+    "division": "paid-media",
+    "emoji": "📺",
+    "color": "#f97316",
+    "vibe": "Buys display and video inventory at scale with surgical precision."
+  },
+  {
+    "name": "Search Query Analyst",
+    "division": "paid-media",
+    "emoji": "🔍",
+    "color": "#f97316",
+    "vibe": "Mines search queries to find the gold your competitors are missing."
+  },
+  {
+    "name": "Tracking & Measurement Specialist",
+    "division": "paid-media",
+    "emoji": "📡",
+    "color": "#f97316",
+    "vibe": "If it's not tracked correctly, it didn't happen."
+  },
+  {
+    "name": "Behavioral Nudge Engine",
+    "division": "product",
+    "emoji": "🧠",
+    "color": "#64748b",
+    "vibe": "Adapts software interactions to maximize user motivation through behavioral psychology."
+  },
+  {
+    "name": "Feedback Synthesizer",
+    "division": "product",
+    "emoji": "🔍",
+    "color": "#3b82f6",
+    "vibe": "Distills a thousand user voices into the five things you need to build next."
+  },
+  {
+    "name": "Product Manager",
+    "division": "product",
+    "emoji": "🧭",
+    "color": "#3b82f6",
+    "vibe": "Ships the right thing, not just the next thing — outcome-obsessed, user-grounded, and diplomatically ruthless about focus."
+  },
+  {
+    "name": "Sprint Prioritizer",
+    "division": "product",
+    "emoji": "🎯",
+    "color": "#22c55e",
+    "vibe": "Maximizes sprint value through data-driven prioritization and ruthless focus."
+  },
+  {
+    "name": "Trend Researcher",
+    "division": "product",
+    "emoji": "🔭",
+    "color": "#a855f7",
+    "vibe": "Spots emerging trends before they hit the mainstream."
+  },
+  {
+    "name": "Experiment Tracker",
+    "division": "project-management",
+    "emoji": "🧪",
+    "color": "#a855f7",
+    "vibe": "Designs experiments, tracks results, and lets the data decide."
+  },
+  {
+    "name": "Jira Workflow Steward",
+    "division": "project-management",
+    "emoji": "📋",
+    "color": "#f97316",
+    "vibe": "Enforces traceable commits, structured PRs, and release-safe branch strategy."
+  },
+  {
+    "name": "Project Shepherd",
+    "division": "project-management",
+    "emoji": "🐑",
+    "color": "#3b82f6",
+    "vibe": "Herds cross-functional chaos into on-time, on-scope delivery."
+  },
+  {
+    "name": "Senior Project Manager",
+    "division": "project-management",
+    "emoji": "📝",
+    "color": "#3b82f6",
+    "vibe": "Converts specs to tasks with realistic scope — no gold-plating, no fantasy."
+  },
+  {
+    "name": "Studio Operations",
+    "division": "project-management",
+    "emoji": "🏭",
+    "color": "#22c55e",
+    "vibe": "Keeps the studio running smoothly — processes, tools, and people in sync."
+  },
+  {
+    "name": "Studio Producer",
+    "division": "project-management",
+    "emoji": "🎬",
+    "color": "#64748b",
+    "vibe": "Aligns creative vision with business objectives across complex initiatives."
+  },
+  {
+    "name": "Account Strategist",
+    "division": "sales",
+    "emoji": "🗺️",
+    "color": "#64748b",
+    "vibe": "Maps the org, finds the whitespace, and turns customers into platforms."
+  },
+  {
+    "name": "Deal Strategist",
+    "division": "sales",
+    "emoji": "♟️",
+    "color": "#64748b",
+    "vibe": "Qualifies deals like a surgeon and kills happy ears on contact."
+  },
+  {
+    "name": "Discovery Coach",
+    "division": "sales",
+    "emoji": "🔍",
+    "color": "#64748b",
+    "vibe": "Asks one more question than everyone else — and that's the one that closes the deal."
+  },
+  {
+    "name": "Outbound Strategist",
+    "division": "sales",
+    "emoji": "🎯",
+    "color": "#64748b",
+    "vibe": "Turns buying signals into booked meetings before the competition even notices."
+  },
+  {
+    "name": "Pipeline Analyst",
+    "division": "sales",
+    "emoji": "📊",
+    "color": "#64748b",
+    "vibe": "Tells you your forecast is wrong before you realize it yourself."
+  },
+  {
+    "name": "Proposal Strategist",
+    "division": "sales",
+    "emoji": "🏹",
+    "color": "#64748b",
+    "vibe": "Turns RFP responses into stories buyers can't put down."
+  },
+  {
+    "name": "Sales Coach",
+    "division": "sales",
+    "emoji": "🏋️",
+    "color": "#64748b",
+    "vibe": "Asks the question that makes the rep rethink the entire deal."
+  },
+  {
+    "name": "Sales Engineer",
+    "division": "sales",
+    "emoji": "🛠️",
+    "color": "#64748b",
+    "vibe": "Wins the technical decision before the deal even hits procurement."
+  },
+  {
+    "name": "macOS Spatial/Metal Engineer",
+    "division": "spatial-computing",
+    "emoji": "🍎",
+    "color": "#64748b",
+    "vibe": "Pushes Metal to its limits for 3D rendering on macOS and Vision Pro."
+  },
+  {
+    "name": "Terminal Integration Specialist",
+    "division": "spatial-computing",
+    "emoji": "🖥️",
+    "color": "#22c55e",
+    "vibe": "Masters terminal emulation and text rendering in modern Swift applications."
+  },
+  {
+    "name": "visionOS Spatial Engineer",
+    "division": "spatial-computing",
+    "emoji": "🥽",
+    "color": "#6366f1",
+    "vibe": "Builds native volumetric interfaces and Liquid Glass experiences for visionOS."
+  },
+  {
+    "name": "XR Cockpit Interaction Specialist",
+    "division": "spatial-computing",
+    "emoji": "🕹️",
+    "color": "#f97316",
+    "vibe": "Designs immersive cockpit control systems that feel natural in XR."
+  },
+  {
+    "name": "XR Immersive Developer",
+    "division": "spatial-computing",
+    "emoji": "🌐",
+    "color": "#64748b",
+    "vibe": "Builds browser-based AR/VR/XR experiences that push WebXR to its limits."
+  },
+  {
+    "name": "XR Interface Architect",
+    "division": "spatial-computing",
+    "emoji": "🫧",
+    "color": "#64748b",
+    "vibe": "Designs spatial interfaces where interaction feels like instinct, not instruction."
+  },
+  {
+    "name": "Accounts Payable Agent",
+    "division": "specialized",
+    "emoji": "💸",
+    "color": "#22c55e",
+    "vibe": "Moves money across any rail — crypto, fiat, stablecoins — so you don't have to."
+  },
+  {
+    "name": "Agentic Identity & Trust Architect",
+    "division": "specialized",
+    "emoji": "🔐",
+    "color": "#64748b",
+    "vibe": "Ensures every AI agent can prove who it is, what it's allowed to do, and what it actually did."
+  },
+  {
+    "name": "Agents Orchestrator",
+    "division": "specialized",
+    "emoji": "🎛️",
+    "color": "#06b6d4",
+    "vibe": "The conductor who runs the entire dev pipeline from spec to ship."
+  },
+  {
+    "name": "Automation Governance Architect",
+    "division": "specialized",
+    "emoji": "⚙️",
+    "color": "#06b6d4",
+    "vibe": "Calm, skeptical, and operations-focused. Prefer reliable systems over automation hype."
+  },
+  {
+    "name": "Blockchain Security Auditor",
+    "division": "specialized",
+    "emoji": "🛡️",
+    "color": "#ef4444",
+    "vibe": "Finds the exploit in your smart contract before the attacker does."
+  },
+  {
+    "name": "Chief of Staff",
+    "division": "specialized",
+    "emoji": "🧭",
+    "color": "#64748b",
+    "vibe": "I don't own any function. I own the space between all of them."
+  },
+  {
+    "name": "Civil Engineer",
+    "division": "specialized",
+    "emoji": "🏗️",
+    "color": "#eab308",
+    "vibe": "Designs structures that stand across borders — from seismic Tokyo to wind-swept Dubai, always code-compliant and constructible."
+  },
+  {
+    "name": "Compliance Auditor",
+    "division": "specialized",
+    "emoji": "📋",
+    "color": "#f97316",
+    "vibe": "Walks you from readiness assessment through evidence collection to SOC 2 certification."
+  },
+  {
+    "name": "Corporate Training Designer",
+    "division": "specialized",
+    "emoji": "📚",
+    "color": "#f97316",
+    "vibe": "Designs training programs that drive real behavior change — from needs analysis to Kirkpatrick Level 3 evaluation — because good training is measured by what le"
+  },
+  {
+    "name": "Cultural Intelligence Strategist",
+    "division": "specialized",
+    "emoji": "🌍",
+    "color": "#64748b",
+    "vibe": "Detects invisible exclusion and ensures your software resonates across cultures."
+  },
+  {
+    "name": "Customer Service",
+    "division": "specialized",
+    "emoji": "🎧",
+    "color": "#14b8a6",
+    "vibe": "Every customer interaction is a chance to turn a problem into loyalty — handle it with care, speed, and a human touch."
+  },
+  {
+    "name": "Data Consolidation Agent",
+    "division": "specialized",
+    "emoji": "🗄️",
+    "color": "#64748b",
+    "vibe": "Consolidates scattered sales data into live reporting dashboards."
+  },
+  {
+    "name": "Developer Advocate",
+    "division": "specialized",
+    "emoji": "🗣️",
+    "color": "#a855f7",
+    "vibe": "Bridges your product team and the developer community through authentic engagement."
+  },
+  {
+    "name": "Document Generator",
+    "division": "specialized",
+    "emoji": "📄",
+    "color": "#3b82f6",
+    "vibe": "Professional documents from code — PDFs, slides, spreadsheets, and reports."
+  },
+  {
+    "name": "French Consulting Market Navigator",
+    "division": "specialized",
+    "emoji": "🇫🇷",
+    "color": "#64748b",
+    "vibe": "The insider who decodes the opaque French consulting food chain so freelancers stop leaving money on the table"
+  },
+  {
+    "name": "Government Digital Presales Consultant",
+    "division": "specialized",
+    "emoji": "🏛️",
+    "color": "#64748b",
+    "vibe": "Navigates the Chinese government IT procurement maze — from policy signals to winning bids — so your team lands digital transformation projects."
+  },
+  {
+    "name": "Healthcare Customer Service",
+    "division": "specialized",
+    "emoji": "🏥",
+    "color": "#14b8a6",
+    "vibe": "Every patient deserves to feel heard, respected, and supported — especially when they're scared, confused, or frustrated."
+  },
+  {
+    "name": "Healthcare Marketing Compliance Specialist",
+    "division": "specialized",
+    "emoji": "⚕️",
+    "color": "#64748b",
+    "vibe": "Keeps your healthcare marketing legal in China's tightly regulated landscape — reviewing content, flagging violations, and finding creative space within complia"
+  },
+  {
+    "name": "Hospitality Guest Services",
+    "division": "specialized",
+    "emoji": "🏨",
+    "color": "#14b8a6",
+    "vibe": "Hospitality is not a transaction — it's a feeling. Every guest interaction is an opportunity to create a memory, earn a return visit, and generate a five-star r"
+  },
+  {
+    "name": "HR Onboarding",
+    "division": "specialized",
+    "emoji": "🤝",
+    "color": "#22c55e",
+    "vibe": "The first 90 days determine whether a new hire becomes a long-term contributor or a regrettable turnover. Get it right from day one."
+  },
+  {
+    "name": "Identity Graph Operator",
+    "division": "specialized",
+    "emoji": "🕸️",
+    "color": "#64748b",
+    "vibe": "Ensures every agent in a multi-agent system gets the same canonical answer for \"who is this?"
+  },
+  {
+    "name": "Korean Business Navigator",
+    "division": "specialized",
+    "emoji": "🇰🇷",
+    "color": "#64748b",
+    "vibe": "The bridge between Western directness and Korean relationship dynamics — reads the room so you don't torch the deal"
+  },
+  {
+    "name": "Language Translator",
+    "division": "specialized",
+    "emoji": "🌐",
+    "color": "#14b8a6",
+    "vibe": "Bridges languages with precision, cultural respect, and the fluency of a native speaker who's lived in both worlds."
+  },
+  {
+    "name": "Legal Billing & Time Tracking",
+    "division": "specialized",
+    "emoji": "⏱️",
+    "color": "#22c55e",
+    "vibe": "Every six minutes of unbilled time is money left on the table. Every unclear billing narrative is a client dispute waiting to happen. Capture it all. Describe i"
+  },
+  {
+    "name": "Legal Client Intake",
+    "division": "specialized",
+    "emoji": "📋",
+    "color": "#3b82f6",
+    "vibe": "The first conversation with a potential client sets the tone for the entire attorney-client relationship. Get it right — warm, professional, and thorough — from"
+  },
+  {
+    "name": "Legal Document Review",
+    "division": "specialized",
+    "emoji": "⚖️",
+    "color": "#3b82f6",
+    "vibe": "Every word in a legal document matters. Every missed clause is a liability. Every risk caught early is a client protected."
+  },
+  {
+    "name": "Loan Officer Assistant",
+    "division": "specialized",
+    "emoji": "🏦",
+    "color": "#3b82f6",
+    "vibe": "Every loan is someone's dream — a home, a business, a fresh start. Move it through the pipeline with precision, compliance, and genuine care for the person behi"
+  },
+  {
+    "name": "LSP/Index Engineer",
+    "division": "specialized",
+    "emoji": "🔎",
+    "color": "#f97316",
+    "vibe": "Builds unified code intelligence through LSP orchestration and semantic indexing."
+  },
+  {
+    "name": "MCP Builder",
+    "division": "specialized",
+    "emoji": "🔌",
+    "color": "#6366f1",
+    "vibe": "Builds the tools that make AI agents actually useful in the real world."
+  },
+  {
+    "name": "Model QA Specialist",
+    "division": "specialized",
+    "emoji": "🔬",
+    "color": "#64748b",
+    "vibe": "Audits ML models end-to-end — from data reconstruction to calibration testing."
+  },
+  {
+    "name": "Real Estate Buyer & Seller",
+    "division": "specialized",
+    "emoji": "🏠",
+    "color": "#14b8a6",
+    "vibe": "Every transaction is someone's biggest financial decision. Every client deserves an agent who is organized, responsive, and genuinely invested in their outcome "
+  },
+  {
+    "name": "Recruitment Specialist",
+    "division": "specialized",
+    "emoji": "🎯",
+    "color": "#3b82f6",
+    "vibe": "Builds your full-cycle recruiting engine across China's hiring platforms, from sourcing to onboarding to compliance."
+  },
+  {
+    "name": "Report Distribution Agent",
+    "division": "specialized",
+    "emoji": "📤",
+    "color": "#64748b",
+    "vibe": "Automates delivery of consolidated sales reports to the right reps."
+  },
+  {
+    "name": "Retail Customer Returns",
+    "division": "specialized",
+    "emoji": "🛒",
+    "color": "#f59e0b",
+    "vibe": "A return is not a failure — it's an opportunity. Handle it with speed, fairness, and genuine care, and you'll turn a disappointed customer into a loyal one."
+  },
+  {
+    "name": "Sales Data Extraction Agent",
+    "division": "specialized",
+    "emoji": "📊",
+    "color": "#64748b",
+    "vibe": "Watches your Excel files and extracts the metrics that matter."
+  },
+  {
+    "name": "Salesforce Architect",
+    "division": "specialized",
+    "emoji": "☁️",
+    "color": "#64748b",
+    "vibe": "The calm hand that turns a tangled Salesforce org into an architecture that scales — one governor limit at a time"
+  },
+  {
+    "name": "Sales Outreach",
+    "division": "specialized",
+    "emoji": "🎯",
+    "color": "#f59e0b",
+    "vibe": "The best salespeople don't sell — they help people buy. Every outreach is a conversation starter, not a pitch."
+  },
+  {
+    "name": "Study Abroad Advisor",
+    "division": "specialized",
+    "emoji": "🎓",
+    "color": "#64748b",
+    "vibe": "Guides Chinese students through the entire study abroad journey — from school selection and essays to visas — with data-driven advice and zero anxiety selling."
+  },
+  {
+    "name": "Supply Chain Strategist",
+    "division": "specialized",
+    "emoji": "🔗",
+    "color": "#3b82f6",
+    "vibe": "Builds your procurement engine and supply chain resilience across China's manufacturing ecosystem, from supplier sourcing to risk management."
+  },
+  {
+    "name": "Workflow Architect",
+    "division": "specialized",
+    "emoji": "\\U0001F5FA\\uFE0F",
+    "color": "#f97316",
+    "vibe": "Every path the system can take — mapped, named, and specified before a single line is written."
+  },
+  {
+    "name": "ZK Steward",
+    "division": "specialized",
+    "emoji": "🗃️",
+    "color": "#14b8a6",
+    "vibe": "Channels Luhmann's Zettelkasten to build connected, validated knowledge bases."
+  },
+  {
+    "name": "Analytics Reporter",
+    "division": "support",
+    "emoji": "📊",
+    "color": "#14b8a6",
+    "vibe": "Transforms raw data into the insights that drive your next decision."
+  },
+  {
+    "name": "Executive Summary Generator",
+    "division": "support",
+    "emoji": "📝",
+    "color": "#a855f7",
+    "vibe": "Thinks like a McKinsey consultant, writes for the C-suite."
+  },
+  {
+    "name": "Finance Tracker",
+    "division": "support",
+    "emoji": "💰",
+    "color": "#22c55e",
+    "vibe": "Keeps the books clean, the cash flowing, and the forecasts honest."
+  },
+  {
+    "name": "Infrastructure Maintainer",
+    "division": "support",
+    "emoji": "🏢",
+    "color": "#f97316",
+    "vibe": "Keeps the lights on, the servers humming, and the alerts quiet."
+  },
+  {
+    "name": "Legal Compliance Checker",
+    "division": "support",
+    "emoji": "⚖️",
+    "color": "#ef4444",
+    "vibe": "Ensures your operations comply with the law across every jurisdiction that matters."
+  },
+  {
+    "name": "Support Responder",
+    "division": "support",
+    "emoji": "💬",
+    "color": "#3b82f6",
+    "vibe": "Turns frustrated users into loyal advocates, one interaction at a time."
+  },
+  {
+    "name": "Accessibility Auditor",
+    "division": "testing",
+    "emoji": "♿",
+    "color": "#64748b",
+    "vibe": "If it's not tested with a screen reader, it's not accessible."
+  },
+  {
+    "name": "API Tester",
+    "division": "testing",
+    "emoji": "🔌",
+    "color": "#a855f7",
+    "vibe": "Breaks your API before your users do."
+  },
+  {
+    "name": "Evidence Collector",
+    "division": "testing",
+    "emoji": "📸",
+    "color": "#f97316",
+    "vibe": "Screenshot-obsessed QA who won't approve anything without visual proof."
+  },
+  {
+    "name": "Performance Benchmarker",
+    "division": "testing",
+    "emoji": "⏱️",
+    "color": "#f97316",
+    "vibe": "Measures everything, optimizes what matters, and proves the improvement."
+  },
+  {
+    "name": "Reality Checker",
+    "division": "testing",
+    "emoji": "🧐",
+    "color": "#ef4444",
+    "vibe": "Defaults to \"NEEDS WORK\" — requires overwhelming proof for production readiness."
+  },
+  {
+    "name": "Test Results Analyzer",
+    "division": "testing",
+    "emoji": "📋",
+    "color": "#6366f1",
+    "vibe": "Reads test results like a detective reads evidence — nothing gets past."
+  },
+  {
+    "name": "Tool Evaluator",
+    "division": "testing",
+    "emoji": "🔧",
+    "color": "#14b8a6",
+    "vibe": "Tests and recommends the right tools so your team doesn't waste time on the wrong ones."
+  },
+  {
+    "name": "Workflow Optimizer",
+    "division": "testing",
+    "emoji": "⚡",
+    "color": "#22c55e",
+    "vibe": "Finds the bottleneck, fixes the process, automates the rest."
+  }
+]
