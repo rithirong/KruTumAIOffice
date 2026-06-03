@@ -100,6 +100,37 @@ export const ceoCreateTask = internalAction({
   },
 });
 
+// Developer writes a self-contained Python script (with tests) that the sandbox
+// will actually run. No external libraries, no network.
+export const devWriteCode = internalAction({
+  args: { taskTitle: v.string(), taskDescription: v.string() },
+  returns: v.object({ code: v.string() }),
+  handler: async (_ctx, args) => {
+    const model = pickModel();
+    if (!model) {
+      return {
+        code:
+          `# mock solution for: ${args.taskTitle}\n` +
+          `def solve():\n    return True\n` +
+          `assert solve() is True\n` +
+          `print("PASS (mock) ${args.taskTitle}")\n`,
+      };
+    }
+    const { text } = await generateText({
+      model,
+      prompt:
+        `คุณคือ Devon นักพัฒนา จงเขียนสคริปต์ Python ไฟล์เดียวที่รันได้ทันที ` +
+        `(ไม่ใช้ไลบรารีภายนอก ไม่ต่อเน็ต) เพื่อ "พิสูจน์" งานนี้: ` +
+        `"${args.taskTitle}" — ${args.taskDescription}\n` +
+        `ทำฟังก์ชันหลักแบบย่อ + เขียน assert ทดสอบอย่างน้อย 2 เคส + print บรรทัด "PASS ..." เมื่อผ่าน ` +
+        `ถ้าตรรกะผิดให้ assert ล้มเพื่อให้ exit code ไม่ใช่ 0\n` +
+        `ตอบกลับเป็นโค้ด Python ล้วน ๆ เท่านั้น ห้ามมีคำอธิบายหรือ markdown fence`,
+    });
+    const code = text.replace(/^\s*```(?:python)?\s*/i, "").replace(/\s*```\s*$/i, "").trim();
+    return { code };
+  },
+});
+
 // Trader narrates what he sees in the gold market and what he is doing.
 export const traderNarrate = internalAction({
   args: {

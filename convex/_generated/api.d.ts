@@ -15,6 +15,7 @@ import type * as goldSignal from "../goldSignal.js";
 import type * as hire from "../hire.js";
 import type * as housekeeper from "../housekeeper.js";
 import type * as orchestrator from "../orchestrator.js";
+import type * as sandbox from "../sandbox.js";
 import type * as seed from "../seed.js";
 import type * as tariq from "../tariq.js";
 
@@ -32,6 +33,7 @@ declare const fullApi: ApiFromModules<{
   hire: typeof hire;
   housekeeper: typeof housekeeper;
   orchestrator: typeof orchestrator;
+  sandbox: typeof sandbox;
   seed: typeof seed;
   tariq: typeof tariq;
 }>;

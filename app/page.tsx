@@ -65,6 +65,29 @@ export default function Home() {
   const stop = useMutation(api.orchestrator.stop);
   const approveTask = useMutation(api.orchestrator.approveTask);
   const rejectTask = useMutation(api.orchestrator.rejectTask);
+  const lastRun = useQuery(api.sandbox.lastRun);
+  const sandboxStatus = useAction(api.sandbox.bridgeStatus);
+  const [sbx, setSbx] = useState<Record<string, unknown> | null>(null);
+  useEffect(() => {
+    let alive = true;
+    const tick = () => sandboxStatus().then((s) => alive && setSbx(s)).catch(() => {});
+    tick();
+    const id = setInterval(tick, 30000);
+    return () => {
+      alive = false;
+      clearInterval(id);
+    };
+  }, [sandboxStatus]);
+  const sbxLabel = !sbx
+    ? null
+    : !sbx.configured
+      ? { text: "Sandbox: ยังไม่ได้ตั้งค่า (Devon บรรยายงานแทน)", cls: "text-slate-500" }
+      : !sbx.reachable
+        ? { text: "Sandbox: เชื่อม bridge ไม่ได้", cls: "text-red-400" }
+        : sbx.docker_running
+          ? { text: "Sandbox: พร้อมรันโค้ดจริง (Docker)", cls: "text-emerald-400" }
+          : { text: "Sandbox: bridge ทำงาน แต่ Docker ปิด", cls: "text-amber-400" };
+
   const materials = useQuery(api.educator.listMaterials);
   const createMaterial = useAction(api.educator.createMaterial);
   const tendDevices = useAction(api.housekeeper.tendDevices);
@@ -354,6 +377,39 @@ export default function Home() {
                   )}
                 </div>
               ))}
+            </div>
+          </section>
+
+          {/* Devon — Sandbox (รันโค้ดจริง) */}
+          <section>
+            <h2 className="text-xs uppercase tracking-wider text-slate-500 mb-2">
+              Devon — Sandbox
+            </h2>
+            <div className="rounded-lg ring-1 ring-white/10 p-3 flex flex-col gap-2">
+              {lastRun ? (
+                <>
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`text-[10px] px-1.5 py-0.5 rounded ${lastRun.ok ? "bg-emerald-600 text-emerald-50" : "bg-red-600 text-red-50"}`}
+                    >
+                      {lastRun.ok ? "✓ รันผ่าน" : `✕ exit ${lastRun.exitCode}`}
+                    </span>
+                    <span className="text-sm font-medium truncate">{lastRun.title}</span>
+                  </div>
+                  <pre className="text-[10px] bg-black/40 rounded p-2 max-h-28 overflow-auto whitespace-pre-wrap text-emerald-300">
+                    {(lastRun.ok ? lastRun.stdout : lastRun.stderr) || "(ไม่มีเอาต์พุต)"}
+                  </pre>
+                  <details className="text-[10px]">
+                    <summary className="cursor-pointer text-slate-500">ดูโค้ดที่ Devon เขียน</summary>
+                    <pre className="bg-black/40 rounded p-2 mt-1 max-h-40 overflow-auto whitespace-pre-wrap text-slate-300">
+                      {lastRun.code}
+                    </pre>
+                  </details>
+                </>
+              ) : (
+                <p className="text-xs text-slate-500">ยังไม่มีการรันโค้ด — สั่งงาน Devon แล้วดูผลที่นี่</p>
+              )}
+              {sbxLabel && <p className={`text-[10px] ${sbxLabel.cls}`}>● {sbxLabel.text}</p>}
             </div>
           </section>
 

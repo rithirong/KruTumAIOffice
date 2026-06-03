@@ -160,8 +160,26 @@ export const completeWork = internalMutation({
     result: v.string(),
     speech: v.string(),
     requiresApproval: v.boolean(),
+    ranOk: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
+    // Sandbox run failed → the task fails (no approval path).
+    if (args.ranOk === false) {
+      await ctx.db.patch(args.taskId, { status: "failed", approved: false });
+      await ctx.db.insert("messages", {
+        from: args.devId,
+        to: args.ceoId,
+        type: "status_update",
+        payload: JSON.stringify({ taskId: args.taskId, result: args.result }),
+      });
+      await ctx.db.patch(args.devId, { status: "idle", speech: args.speech });
+      await ctx.db.insert("events", {
+        type: "task_failed",
+        actorId: args.devId,
+        data: JSON.stringify({ taskId: args.taskId }),
+      });
+      return;
+    }
     if (args.requiresApproval) {
       await ctx.db.patch(args.taskId, { status: "awaiting_approval" });
       await ctx.db.insert("messages", {
@@ -293,24 +311,55 @@ export const step = action({
       return { actor: s.dev.name, did: "started", detail: s.openTask.title };
     }
 
-    // Task in progress → developer finishes it.
-    const work = await ctx.runAction(internal.ai.devDoTask, {
-      devName: s.dev.name,
-      devPersona: s.dev.persona,
+    // Task in progress → developer finishes it. If the sandbox bridge is
+    // configured, Devon actually writes & runs code; otherwise he describes it.
+    const sandbox = await ctx.runAction(internal.sandbox.runForTask, {
       taskTitle: s.openTask.title,
       taskDescription: s.openTask.description,
     });
+
+    let result: string;
+    let speech: string;
+    let ranOk = true;
+    if (sandbox.executed) {
+      ranOk = !!sandbox.ok;
+      await ctx.runMutation(internal.sandbox.storeRun, {
+        taskId: s.openTask.id,
+        agentId: s.dev.id,
+        title: s.openTask.title,
+        code: sandbox.code ?? "",
+        stdout: sandbox.stdout ?? "",
+        stderr: sandbox.stderr ?? "",
+        exitCode: sandbox.exitCode ?? -1,
+        ok: ranOk,
+      });
+      result = ranOk
+        ? `รันผ่าน (exit 0)\n${(sandbox.stdout ?? "").trim()}`.slice(0, 500)
+        : `รันไม่ผ่าน (exit ${sandbox.exitCode})\n${(sandbox.stderr ?? "").trim()}`.slice(0, 500);
+      speech = ranOk ? "โค้ดรันผ่านทั้งหมดในแซนด์บ็อกซ์ครับ" : "ยังรันไม่ผ่าน เดี๋ยวผมแก้ครับ";
+    } else {
+      const work = await ctx.runAction(internal.ai.devDoTask, {
+        devName: s.dev.name,
+        devPersona: s.dev.persona,
+        taskTitle: s.openTask.title,
+        taskDescription: s.openTask.description,
+      });
+      result = work.result;
+      speech = work.speech;
+    }
+
     await ctx.runMutation(internal.orchestrator.completeWork, {
       devId: s.dev.id,
       ceoId: s.ceo.id,
       taskId: s.openTask.id,
-      result: work.result,
-      speech: work.speech,
+      result,
+      speech,
       requiresApproval: s.openTask.requiresApproval,
+      ranOk,
     });
     return {
       actor: s.dev.name,
-      did: s.openTask.requiresApproval ? "awaiting_approval" : "completed",
+      did: !ranOk ? "failed" : s.openTask.requiresApproval ? "awaiting_approval" : "completed",
       detail: s.openTask.title,
     };
   },
