@@ -210,11 +210,13 @@ export default function Home() {
   };
 
   return (
-    <main className="flex-1 flex flex-col items-center gap-6 p-8 bg-[#0a0b10] text-slate-200">
+    <main className="flex-1 flex flex-col items-center gap-6 p-8 bg-gradient-to-b from-[#0a0b12] via-[#0c0e16] to-[#10121c] text-slate-200">
       {hireOpen && <HirePanel onClose={() => setHireOpen(false)} />}
       <header className="text-center">
-        <h1 className="text-2xl font-bold tracking-tight">🏢 Gemification</h1>
-        <p className="text-sm text-slate-400">บริษัท AI หลายเอเจนต์ในรูปแบบเกม</p>
+        <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-amber-300 via-pink-300 to-violet-300 bg-clip-text text-transparent">
+          🏢 Gemification
+        </h1>
+        <p className="text-sm text-slate-400 mt-1">บริษัท AI หลายเอเจนต์ในรูปแบบเกม</p>
       </header>
 
       <div className="flex flex-col lg:flex-row gap-6 items-start">
