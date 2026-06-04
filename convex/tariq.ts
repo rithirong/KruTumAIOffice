@@ -6,6 +6,7 @@ import { action, query, internalQuery, internalMutation } from "./_generated/ser
 import { v } from "convex/values";
 import { internal } from "./_generated/api";
 import { analyzeGold, type GoldSignal } from "./goldSignal";
+import { addXp } from "./xp";
 
 const RISK_FRACTION = 0.02; // risk ~2% of cash per trade on the SL distance
 const ATR_SL = 1.0;
@@ -123,6 +124,7 @@ export const closePosition = internalMutation({
       actorId: args.agentId,
       data: JSON.stringify({ exit: args.exit, pnl: args.pnl, reason: args.reason }),
     });
+    await addXp(ctx, args.agentId, args.pnl >= 0 ? 15 : 5); // bonus for a winning trade
   },
 });
 

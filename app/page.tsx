@@ -354,12 +354,21 @@ export default function Home() {
                       <span className="text-[10px] text-slate-500">
                         {STATUS_TH[a.status] ?? a.status}
                       </span>
+                      <span className="ml-auto text-[10px] font-semibold text-amber-300">
+                        Lv {Math.floor((a.xp ?? 0) / 100) + 1}
+                      </span>
                     </div>
                     {a.speech ? (
                       <p className="text-xs text-slate-300 italic truncate">“{a.speech}”</p>
                     ) : (
                       <p className="text-xs text-slate-600 truncate">{a.personality}</p>
                     )}
+                    <div className="mt-1 h-1 w-full rounded-full bg-white/10 overflow-hidden">
+                      <div
+                        className="h-full rounded-full bg-gradient-to-r from-amber-400 to-pink-400"
+                        style={{ width: `${(a.xp ?? 0) % 100}%` }}
+                      />
+                    </div>
                   </div>
                 </div>
               ))}

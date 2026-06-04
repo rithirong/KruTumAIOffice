@@ -14,6 +14,7 @@ import {
   internalMutation,
   internalQuery,
 } from "./_generated/server";
+import { addXp } from "./xp";
 
 const LOOP_MS = 4000;
 const DEV_DESKS: [number, number][] = [
@@ -212,6 +213,7 @@ export const completeWork = internalMutation({
       actorId: args.devId,
       data: JSON.stringify({ taskId: args.taskId }),
     });
+    await addXp(ctx, args.devId, 10); // shipped a task
   },
 });
 
@@ -245,6 +247,8 @@ export const approveTask = mutation({
       actorId: task.createdBy,
       data: JSON.stringify({ taskId: args.taskId, title: task.title }),
     });
+    await addXp(ctx, task.assignedTo, 15); // dev: approved & deployed
+    await addXp(ctx, task.createdBy, 5); // ceo: shipped under her
   },
 });
 

@@ -43,6 +43,8 @@ export default defineSchema({
     color: v.string(),
     // Latest thought/speech bubble text, if any.
     speech: v.optional(v.string()),
+    // Experience points earned by completing work (drives level).
+    xp: v.optional(v.number()),
   }).index("by_role", ["role"]),
 
   // Work items the CEO delegates and other agents execute.

@@ -5,6 +5,7 @@
 import { action, query, internalQuery, internalMutation } from "./_generated/server";
 import { v } from "convex/values";
 import { internal } from "./_generated/api";
+import { addXp } from "./xp";
 
 const SPOTS: [number, number][] = [
   [6, 4],
@@ -59,6 +60,7 @@ export const recordWork = internalMutation({
       y: spot[1],
       room: "office",
     });
+    await addXp(ctx, args.agentId, 8); // delivered department work
   },
 });
 

@@ -7,6 +7,7 @@
 import { action, internalQuery, internalMutation } from "./_generated/server";
 import { v } from "convex/values";
 import { internal } from "./_generated/api";
+import { addXp } from "./xp";
 
 // Simulated IoT chores around the office (Thai).
 const CHORES = [
@@ -56,6 +57,7 @@ export const setHousekeeper = internalMutation({
       actorId: args.id,
       data: JSON.stringify({ chore: args.chore, simulated: true }),
     });
+    await addXp(ctx, args.id, 5); // tended the office
   },
 });
 

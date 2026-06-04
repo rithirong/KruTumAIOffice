@@ -19,6 +19,7 @@ import type * as sandbox from "../sandbox.js";
 import type * as seed from "../seed.js";
 import type * as staff from "../staff.js";
 import type * as tariq from "../tariq.js";
+import type * as xp from "../xp.js";
 
 import type {
   ApiFromModules,
@@ -38,6 +39,7 @@ declare const fullApi: ApiFromModules<{
   seed: typeof seed;
   staff: typeof staff;
   tariq: typeof tariq;
+  xp: typeof xp;
 }>;
 
 /**

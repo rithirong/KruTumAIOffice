@@ -4,6 +4,7 @@
 import { action, query, internalQuery, internalMutation } from "./_generated/server";
 import { v } from "convex/values";
 import { internal } from "./_generated/api";
+import { addXp } from "./xp";
 
 const CLASSROOM_DESKS: [number, number][] = [
   [11, 2],
@@ -64,6 +65,7 @@ export const storeMaterial = internalMutation({
       actorId: args.agentId,
       data: JSON.stringify({ topic: args.topic, bytes: args.indexHtml.length }),
     });
+    await addXp(ctx, args.agentId, 12); // created a teaching material
     return id;
   },
 });
