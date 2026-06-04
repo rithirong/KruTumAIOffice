@@ -365,6 +365,37 @@ export const step = action({
   },
 });
 
+// Human directive → CEO turns it into a task and assigns it to the developer.
+export const directCeo = action({
+  args: { directive: v.string() },
+  handler: async (ctx, args): Promise<{ ok: boolean; title: string }> => {
+    const directive = args.directive.trim();
+    if (!directive) return { ok: false, title: "" };
+    const s = await ctx.runQuery(internal.orchestrator.getState, {});
+    if (!s.ceo || !s.dev) return { ok: false, title: "" };
+
+    await ctx.runMutation(internal.orchestrator.setSpeech, {
+      id: s.ceo.id,
+      status: "thinking",
+      speech: "รับคำสั่งจากเจ้านาย กำลังจัดงาน…",
+    });
+    const plan = await ctx.runAction(internal.ai.ceoPlanDirective, {
+      ceoName: s.ceo.name,
+      ceoPersona: s.ceo.persona,
+      directive,
+    });
+    await ctx.runMutation(internal.orchestrator.assignTask, {
+      ceoId: s.ceo.id,
+      devId: s.dev.id,
+      title: plan.title,
+      description: plan.description,
+      ceoSpeech: plan.speech,
+      requiresApproval: plan.requiresApproval,
+    });
+    return { ok: true, title: plan.title };
+  },
+});
+
 // ---------- game loop control ----------
 
 export const ensureSim = internalMutation({

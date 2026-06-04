@@ -58,6 +58,19 @@ export default function Home() {
   const equity = useQuery(api.tariq.equityHistory);
   const seed = useMutation(api.seed.seedAgents);
   const step = useAction(api.orchestrator.step);
+  const directCeo = useAction(api.orchestrator.directCeo);
+  const [directive, setDirective] = useState("");
+  const [directing, setDirecting] = useState(false);
+  const onDirect = async () => {
+    if (!directive.trim()) return;
+    setDirecting(true);
+    try {
+      await directCeo({ directive });
+      setDirective("");
+    } finally {
+      setDirecting(false);
+    }
+  };
   const tradeStep = useAction(api.tariq.tradeStep);
   const submitRealOrder = useAction(api.tariq.submitRealOrder);
   const bridgeStatus = useAction(api.tariq.bridgeStatus);
@@ -268,6 +281,25 @@ export default function Home() {
               )}{" "}
               · รอบที่ {sim?.tick ?? 0}
             </span>
+          </div>
+
+          {/* สั่งงาน Diana (CEO) โดยตรง */}
+          <div className="flex gap-2">
+            <input
+              value={directive}
+              onChange={(e) => setDirective(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && onDirect()}
+              placeholder="สั่งงาน Diana เช่น “ทำหน้าโปรไฟล์ผู้ใช้”"
+              disabled={!seeded}
+              className="flex-1 min-w-0 rounded-md bg-white/5 ring-1 ring-white/10 px-3 py-2 text-sm outline-none focus:ring-amber-400/40 disabled:opacity-40"
+            />
+            <button
+              onClick={onDirect}
+              disabled={!seeded || directing || !directive.trim()}
+              className="rounded-md bg-amber-500 hover:bg-amber-400 disabled:opacity-40 px-4 py-2 text-sm font-medium text-black transition whitespace-nowrap"
+            >
+              {directing ? "กำลังสั่ง…" : "สั่ง Diana"}
+            </button>
           </div>
 
           {sim?.lastError && (

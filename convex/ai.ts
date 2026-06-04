@@ -100,6 +100,44 @@ export const ceoCreateTask = internalAction({
   },
 });
 
+// CEO turns a human directive into a concrete dev task (in character).
+export const ceoPlanDirective = internalAction({
+  args: { ceoName: v.string(), ceoPersona: v.string(), directive: v.string() },
+  returns: v.object({
+    title: v.string(),
+    description: v.string(),
+    speech: v.string(),
+    requiresApproval: v.boolean(),
+  }),
+  handler: async (_ctx, args) => {
+    const risky = (s: string) => /เข้าสู่ระบบ|ล็อกอิน|พอร์ต|การเงิน|ลบ|deploy|production|ชำระเงิน/i.test(s);
+    const model = pickModel();
+    if (!model) {
+      return {
+        title: args.directive.slice(0, 60),
+        description: args.directive,
+        speech: `${args.directive} — จัดให้เลย`,
+        requiresApproval: risky(args.directive),
+      };
+    }
+    const { object } = await generateObject({
+      model,
+      schema: z.object({
+        title: z.string().describe("ชื่องานสั้น ๆ เป็นประโยคคำสั่ง (ภาษาไทย)"),
+        description: z.string().describe("สเปกงานสำหรับนักพัฒนา 1-2 ประโยค (ภาษาไทย)"),
+        speech: z.string().describe("ประโยคสั้น ๆ ที่ซีอีโอพูดเมื่อรับคำสั่งจากเจ้านาย (ภาษาไทย)"),
+        requiresApproval: z.boolean().describe("true ถ้างานเสี่ยง (auth/การเงิน/ลบข้อมูล/deploy)"),
+      }),
+      prompt:
+        `คุณคือ ${args.ceoName} ซีอีโอ (${args.ceoPersona}) ` +
+        `เจ้านาย (ผู้ใช้) สั่งงานนี้: "${args.directive}" ` +
+        `จงแปลงเป็นงานพัฒนาเว็บที่เป็นรูปธรรม 1 งานเพื่อมอบให้นักพัฒนา ` +
+        `ตอบเป็นภาษาไทยทั้งหมด`,
+    });
+    return object;
+  },
+});
+
 // Developer writes a self-contained Python script (with tests) that the sandbox
 // will actually run. No external libraries, no network.
 export const devWriteCode = internalAction({
