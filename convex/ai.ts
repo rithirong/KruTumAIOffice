@@ -100,6 +100,52 @@ export const ceoCreateTask = internalAction({
   },
 });
 
+// A hired Staff member produces one small department-appropriate deliverable.
+const DIVISION_TH: Record<string, string> = {
+  engineering: "เขียนโค้ด/ปรับปรุงระบบ",
+  design: "ออกแบบ UI/กราฟิก",
+  marketing: "ทำคอนเทนต์/แคมเปญการตลาด",
+  "paid-media": "ยิงโฆษณา/วางงบสื่อ",
+  sales: "ปิดการขาย/ดูแลลูกค้า",
+  product: "วางสเปก/โรดแมปผลิตภัณฑ์",
+  "project-management": "วางแผน/ติดตามงาน",
+  finance: "วิเคราะห์การเงิน/งบประมาณ",
+  testing: "ทดสอบ/หาบั๊ก",
+  support: "ดูแล/ตอบลูกค้า",
+  academic: "วิจัย/วิเคราะห์เชิงวิชาการ",
+  "game-development": "พัฒนาเกม",
+  "spatial-computing": "งาน AR/VR/3D",
+  strategy: "วางกลยุทธ์",
+  specialized: "งานเฉพาะทาง",
+};
+
+export const staffWork = internalAction({
+  args: { name: v.string(), division: v.string(), persona: v.string() },
+  returns: v.object({ output: v.string(), speech: v.string() }),
+  handler: async (_ctx, args) => {
+    const domain = DIVISION_TH[args.division] ?? args.division;
+    const model = pickModel();
+    if (!model) {
+      return {
+        output: `ส่งงานสาย ${domain} หนึ่งชิ้น (จำลอง)`,
+        speech: `ทำงาน ${domain} อยู่ครับ/ค่ะ`,
+      };
+    }
+    const { object } = await generateObject({
+      model,
+      schema: z.object({
+        output: z.string().describe("ชิ้นงาน/อัปเดตที่เป็นรูปธรรม 1 บรรทัดในสายงานนี้ (ภาษาไทย)"),
+        speech: z.string().describe("ประโยคสั้น ๆ ที่พนักงานพูดตามคาแรกเตอร์ (ภาษาไทย)"),
+      }),
+      prompt:
+        `คุณคือ ${args.name} ผู้เชี่ยวชาญสาย ${args.division} (${args.persona}) ` +
+        `จงส่งมอบชิ้นงานเล็ก ๆ ที่เป็นรูปธรรม 1 ชิ้นในสายงานของคุณ (${domain}) ให้บริษัทวันนี้ ` +
+        `ตอบเป็นภาษาไทย สั้น กระชับ`,
+    });
+    return object;
+  },
+});
+
 // CEO turns a human directive into a concrete dev task (in character).
 export const ceoPlanDirective = internalAction({
   args: { ceoName: v.string(), ceoPersona: v.string(), directive: v.string() },

@@ -78,6 +78,17 @@ export default function Home() {
   const stop = useMutation(api.orchestrator.stop);
   const approveTask = useMutation(api.orchestrator.approveTask);
   const rejectTask = useMutation(api.orchestrator.rejectTask);
+  const works = useQuery(api.staff.recentWorks);
+  const doStaffWork = useAction(api.staff.doWork);
+  const [staffing, setStaffing] = useState(false);
+  const onStaffWork = async () => {
+    setStaffing(true);
+    try {
+      await doStaffWork();
+    } finally {
+      setStaffing(false);
+    }
+  };
   const lastRun = useQuery(api.sandbox.lastRun);
   const sandboxStatus = useAction(api.sandbox.bridgeStatus);
   const [sbx, setSbx] = useState<Record<string, unknown> | null>(null);
@@ -409,6 +420,37 @@ export default function Home() {
                       </button>
                     </div>
                   )}
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* งานทีม (พนักงานที่จ้างมา) */}
+          <section>
+            <h2 className="text-xs uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-2">
+              🧑‍💼 งานทีม
+              <button
+                onClick={onStaffWork}
+                disabled={staffing}
+                className="ml-auto normal-case tracking-normal text-[10px] rounded bg-fuchsia-600 hover:bg-fuchsia-500 disabled:opacity-40 px-2 py-0.5 font-medium transition"
+              >
+                {staffing ? "กำลังทำงาน…" : "ให้ทีมทำงาน"}
+              </button>
+            </h2>
+            <div className="rounded-xl bg-white/[0.02] ring-1 ring-white/10 divide-y divide-white/5 max-h-48 overflow-auto">
+              {works === undefined && <p className="p-3 text-xs text-slate-500">กำลังโหลด…</p>}
+              {works?.length === 0 && (
+                <p className="p-3 text-xs text-slate-500">
+                  ยังไม่มีงานจากทีม — จ้างพนักงานแล้วกด “ให้ทีมทำงาน” หรือรันอัตโนมัติ
+                </p>
+              )}
+              {works?.map((w) => (
+                <div key={w.id} className="p-2.5">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-medium truncate">{w.name}</span>
+                    <span className="text-[10px] text-fuchsia-300/80">{w.division}</span>
+                  </div>
+                  <p className="text-xs text-slate-400 mt-0.5 line-clamp-2">{w.output}</p>
                 </div>
               ))}
             </div>

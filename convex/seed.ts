@@ -15,6 +15,7 @@ export const reset = mutation({
       "equity",
       "materials",
       "runs",
+      "works",
       "sim",
     ] as const) {
       const rows = await ctx.db.query(table).collect();

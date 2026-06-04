@@ -483,6 +483,14 @@ export const loop = internalAction({
         message: "Tariq: " + (err instanceof Error ? err.message : String(err)),
       });
     }
+    // One hired Staff member does a beat of department work (no-op if none).
+    try {
+      await ctx.runAction(api.staff.doWork, {});
+    } catch (err) {
+      await ctx.runMutation(internal.orchestrator.logError, {
+        message: "Staff: " + (err instanceof Error ? err.message : String(err)),
+      });
+    }
     await ctx.scheduler.runAfter(LOOP_MS, internal.orchestrator.loop, {});
   },
 });

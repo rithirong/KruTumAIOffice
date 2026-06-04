@@ -107,6 +107,14 @@ export default defineSchema({
     data: v.string(),
   }).index("by_type", ["type"]),
 
+  // Department deliverables produced by hired Staff agents (the team feed).
+  works: defineTable({
+    agentId: v.id("agents"),
+    name: v.string(),
+    division: v.string(),
+    output: v.string(),
+  }),
+
   // Sandbox executions by Devon (code + real output from the Docker runner).
   runs: defineTable({
     taskId: v.optional(v.id("tasks")),

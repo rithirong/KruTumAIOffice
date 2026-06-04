@@ -17,6 +17,7 @@ import type * as housekeeper from "../housekeeper.js";
 import type * as orchestrator from "../orchestrator.js";
 import type * as sandbox from "../sandbox.js";
 import type * as seed from "../seed.js";
+import type * as staff from "../staff.js";
 import type * as tariq from "../tariq.js";
 
 import type {
@@ -35,6 +36,7 @@ declare const fullApi: ApiFromModules<{
   orchestrator: typeof orchestrator;
   sandbox: typeof sandbox;
   seed: typeof seed;
+  staff: typeof staff;
   tariq: typeof tariq;
 }>;
 
