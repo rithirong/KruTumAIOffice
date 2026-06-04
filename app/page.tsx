@@ -281,10 +281,10 @@ export default function Home() {
         <aside className="w-80 flex flex-col gap-4">
           {/* พนักงาน */}
           <section>
-            <h2 className="text-xs uppercase tracking-wider text-slate-500 mb-2">
-              พนักงาน
+            <h2 className="text-xs uppercase tracking-wider text-slate-400 mb-2">
+              👥 พนักงาน
             </h2>
-            <div className="rounded-lg ring-1 ring-white/10 divide-y divide-white/5">
+            <div className="rounded-xl bg-white/[0.02] ring-1 ring-white/10 divide-y divide-white/5">
               {agents === undefined && (
                 <p className="p-3 text-sm text-slate-500">กำลังเชื่อมต่อ…</p>
               )}
@@ -325,8 +325,8 @@ export default function Home() {
 
           {/* กระดานงาน */}
           <section>
-            <h2 className="text-xs uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-2">
-              กระดานงาน
+            <h2 className="text-xs uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-2">
+              📋 กระดานงาน
               {(() => {
                 const n = tasks?.filter((t) => t.status === "awaiting_approval").length ?? 0;
                 return n > 0 ? (
@@ -336,7 +336,7 @@ export default function Home() {
                 ) : null;
               })()}
             </h2>
-            <div className="rounded-lg ring-1 ring-white/10 divide-y divide-white/5 max-h-80 overflow-auto">
+            <div className="rounded-xl bg-white/[0.02] ring-1 ring-white/10 divide-y divide-white/5 max-h-80 overflow-auto">
               {tasks === undefined && (
                 <p className="p-3 text-sm text-slate-500">กำลังโหลด…</p>
               )}
@@ -385,9 +385,9 @@ export default function Home() {
           {/* Devon — Sandbox (รันโค้ดจริง) */}
           <section>
             <h2 className="text-xs uppercase tracking-wider text-slate-500 mb-2">
-              Devon — Sandbox
+              🐳 Devon — Sandbox
             </h2>
-            <div className="rounded-lg ring-1 ring-white/10 p-3 flex flex-col gap-2">
+            <div className="rounded-xl bg-white/[0.02] ring-1 ring-white/10 p-3 flex flex-col gap-2">
               {lastRun ? (
                 <>
                   <div className="flex items-center gap-2">
@@ -418,9 +418,9 @@ export default function Home() {
           {/* เทรดเดอร์ทอง (Tariq) */}
           <section>
             <h2 className="text-xs uppercase tracking-wider text-slate-500 mb-2">
-              เทรดเดอร์ทอง — {trader?.name ?? "Tariq"}
+              🥇 เทรดเดอร์ทอง — {trader?.name ?? "Tariq"}
             </h2>
-            <div className="rounded-lg ring-1 ring-white/10 p-3 flex flex-col gap-3">
+            <div className="rounded-xl bg-white/[0.02] ring-1 ring-white/10 p-3 flex flex-col gap-3">
               {!trader ? (
                 <p className="text-sm text-slate-500">กำลังโหลด…</p>
               ) : (
@@ -531,9 +531,9 @@ export default function Home() {
           {/* ครูตั้ม — สื่อการสอน GAS */}
           <section>
             <h2 className="text-xs uppercase tracking-wider text-slate-500 mb-2">
-              ครูตั้ม — สื่อการสอน GAS
+              🎓 ครูตั้ม — สื่อการสอน GAS
             </h2>
-            <div className="rounded-lg ring-1 ring-white/10 p-3 flex flex-col gap-3">
+            <div className="rounded-xl bg-white/[0.02] ring-1 ring-white/10 p-3 flex flex-col gap-3">
               <div className="flex gap-2">
                 <input
                   value={topic}
@@ -597,9 +597,9 @@ export default function Home() {
           {/* แม่บ้านนวล — IoT */}
           <section>
             <h2 className="text-xs uppercase tracking-wider text-slate-500 mb-2">
-              แม่บ้านนวล — IoT
+              🏠 แม่บ้านนวล — IoT
             </h2>
-            <div className="rounded-lg ring-1 ring-white/10 p-3 flex flex-col gap-2">
+            <div className="rounded-xl bg-white/[0.02] ring-1 ring-white/10 p-3 flex flex-col gap-2">
               <button
                 onClick={onTend}
                 disabled={tending}
