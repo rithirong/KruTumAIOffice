@@ -1,8 +1,10 @@
-"""Generate detailed 64px pixel-art character sprites as TWO aligned sheets:
-  - public/sprites/agent-base.png   skin/hair/face/pants/shoes/outline (NOT tinted)
-  - public/sprites/agent-shirt.png  the shirt only, white (tinted per agent)
-Stacking base + tinted shirt gives a real little person whose shirt is each
-agent's colour while skin/hair stay natural.
+"""Generate detailed 64px characters as FOUR tintable layers so every agent can
+have a different skin tone, hair colour and shirt colour:
+  public/sprites/agent-base.png    legs / pants / shoes (fixed, NOT tinted)
+  public/sprites/agent-skin.png    head + hands (white, tinted to a skin tone)
+  public/sprites/agent-hair.png    hair (white, tinted to a hair colour)
+  public/sprites/agent-shirt.png   shirt + sleeves (white, tinted to agent colour)
+Dark outlines/eyes are baked into each layer and stay dark under tint.
 
 Layout: 4 rows (down, up, left, right) x 4 walk frames. Logical 32x32, x2 -> 64.
 Run: py scripts/gen-sprites.py
@@ -10,95 +12,79 @@ Run: py scripts/gen-sprites.py
 from PIL import Image, ImageDraw
 import os
 
-L = 32          # logical frame
-S = 2           # upscale
-F = L * S       # 64
+L, S = 32, 2
+F = L * S
 DIRS = ["down", "up", "left", "right"]
 NF = 4
 
 OUT = (28, 28, 38, 255)
-SKIN = (242, 198, 140, 255)
-SKIN_SH = (214, 165, 112, 255)
-HAIR = (70, 48, 34, 255)
-HAIR_SH = (52, 34, 24, 255)
+WHITE = (255, 255, 255, 255)
+LSH = (224, 224, 230, 255)     # light shade (stays a slightly darker tint)
 PANTS = (58, 64, 86, 255)
 PANTS_SH = (44, 49, 68, 255)
 SHOE = (36, 36, 46, 255)
-SHIRT = (255, 255, 255, 255)
-SHIRT_SH = (222, 222, 230, 255)
 NONE = (0, 0, 0, 0)
 
 
-def new():
+def canvas():
     img = Image.new("RGBA", (L, L), NONE)
-    return img, ImageDraw.Draw(img)
+    return img, ImageDraw.Draw(img), (lambda v, f: v + (-1 if f in (1, 3) else 0))
 
 
-def legs(d, f):
-    # returns (left_leg_box, right_leg_box) y-extent varies to fake a step
-    base_top = 23
-    ll = [12, base_top, 15, 31]
-    rl = [17, base_top, 20, 31]
+def legs(f):
+    ll = [12, 23, 15, 31]
+    rl = [17, 23, 20, 31]
     if f == 1:
-        rl[1] = base_top + 2  # right leg lifted
+        rl[1] = 25
     elif f == 3:
-        ll[1] = base_top + 2  # left leg lifted
+        ll[1] = 25
     return ll, rl
 
 
 def draw_base(d, f):
-    img, g = new()
-    bob = -1 if f in (1, 3) else 0
-    y = lambda v: v + bob
-
-    ll, rl = legs(d, f)
-    # legs (pants) + shoes
+    img, g, _ = canvas()
+    ll, rl = legs(f)
     for box in (ll, rl):
         g.rectangle([box[0], box[1], box[2], box[3] - 2], fill=PANTS, outline=OUT)
         g.rectangle([box[0], box[3] - 2, box[2], box[3]], fill=SHOE, outline=OUT)
-    g.rectangle([rl[0] + 1, rl[1], rl[2], rl[3] - 2], fill=PANTS_SH)  # subtle leg shade
+    g.rectangle([rl[0] + 1, rl[1], rl[2], rl[3] - 2], fill=PANTS_SH)
+    return img.resize((F, F), Image.NEAREST)
 
-    # hands (skin) — arms hang beside the torso; sleeves are on the shirt sheet
-    g.rectangle([8, y(17), 10, y(21)], fill=SKIN, outline=OUT)
-    g.rectangle([22, y(17), 24, y(21)], fill=SKIN, outline=OUT)
 
-    # head
-    g.ellipse([10, y(4), 22, y(15)], fill=SKIN, outline=OUT)
-    g.ellipse([17, y(6), 22, y(14)], fill=SKIN_SH)  # cheek shade
-    # hair
-    if d == "up":
-        g.chord([10, y(3), 22, y(16)], 200, 340, fill=HAIR, outline=OUT)  # full back of head
-        g.ellipse([10, y(4), 22, y(12)], fill=HAIR)
-    else:
-        g.pieslice([10, y(3), 22, y(15)], 180, 360, fill=HAIR, outline=OUT)
-        g.ellipse([10, y(3), 22, y(9)], fill=HAIR)
-        g.rectangle([19, y(5), 21, y(9)], fill=HAIR_SH)
-
-    # face
+def draw_skin(d, f):
+    img, g, y = canvas()
+    g.rectangle([8, y(17, f), 10, y(21, f)], fill=WHITE, outline=OUT)   # hands
+    g.rectangle([22, y(17, f), 24, y(21, f)], fill=WHITE, outline=OUT)
+    g.ellipse([10, y(4, f), 22, y(15, f)], fill=WHITE, outline=OUT)     # head
+    g.ellipse([17, y(6, f), 22, y(14, f)], fill=LSH)                    # cheek shade
     if d == "down":
-        g.rectangle([13, y(9), 14, y(10)], fill=OUT)
-        g.rectangle([18, y(9), 19, y(10)], fill=OUT)
-        g.line([15, y(12), 17, y(12)], fill=SKIN_SH)
+        g.rectangle([13, y(9, f), 14, y(10, f)], fill=OUT)
+        g.rectangle([18, y(9, f), 19, y(10, f)], fill=OUT)
     elif d == "left":
-        g.rectangle([12, y(9), 13, y(10)], fill=OUT)
+        g.rectangle([12, y(9, f), 13, y(10, f)], fill=OUT)
     elif d == "right":
-        g.rectangle([19, y(9), 20, y(10)], fill=OUT)
+        g.rectangle([19, y(9, f), 20, y(10, f)], fill=OUT)
+    return img.resize((F, F), Image.NEAREST)
 
+
+def draw_hair(d, f):
+    img, g, y = canvas()
+    if d == "up":
+        g.ellipse([10, y(3, f), 22, y(14, f)], fill=WHITE, outline=OUT)  # full back of head
+        g.ellipse([12, y(5, f), 20, y(12, f)], fill=LSH)
+    else:
+        g.pieslice([10, y(3, f), 22, y(15, f)], 180, 360, fill=WHITE, outline=OUT)
+        g.ellipse([10, y(3, f), 22, y(9, f)], fill=WHITE, outline=OUT)
+        g.rectangle([19, y(5, f), 21, y(8, f)], fill=LSH)
     return img.resize((F, F), Image.NEAREST)
 
 
 def draw_shirt(d, f):
-    img, g = new()
-    bob = -1 if f in (1, 3) else 0
-    y = lambda v: v + bob
-    # torso
-    g.rectangle([11, y(14), 21, y(23)], fill=SHIRT, outline=OUT)
-    # sleeves over the upper arms
-    g.rectangle([8, y(14), 11, y(18)], fill=SHIRT, outline=OUT)
-    g.rectangle([21, y(14), 24, y(18)], fill=SHIRT, outline=OUT)
-    # subtle right-side shade so the tint reads as 3D
-    g.rectangle([18, y(15), 20, y(22)], fill=SHIRT_SH)
-    g.rectangle([22, y(15), 23, y(17)], fill=SHIRT_SH)
+    img, g, y = canvas()
+    g.rectangle([11, y(14, f), 21, y(23, f)], fill=WHITE, outline=OUT)   # torso
+    g.rectangle([8, y(14, f), 11, y(18, f)], fill=WHITE, outline=OUT)    # sleeves
+    g.rectangle([21, y(14, f), 24, y(18, f)], fill=WHITE, outline=OUT)
+    g.rectangle([18, y(15, f), 20, y(22, f)], fill=LSH)                  # shade
     return img.resize((F, F), Image.NEAREST)
 
 
@@ -113,9 +99,14 @@ def build(drawer):
 def main():
     out_dir = os.path.join(os.path.dirname(__file__), "..", "public", "sprites")
     os.makedirs(out_dir, exist_ok=True)
-    build(draw_base).save(os.path.join(out_dir, "agent-base.png"))
-    build(draw_shirt).save(os.path.join(out_dir, "agent-shirt.png"))
-    print(f"wrote agent-base.png + agent-shirt.png ({F*NF}x{F*len(DIRS)}, frame={F})")
+    for name, drawer in [
+        ("agent-base", draw_base),
+        ("agent-skin", draw_skin),
+        ("agent-hair", draw_hair),
+        ("agent-shirt", draw_shirt),
+    ]:
+        build(drawer).save(os.path.join(out_dir, f"{name}.png"))
+    print(f"wrote 4 layers ({F*NF}x{F*len(DIRS)}, frame={F})")
 
 
 if __name__ == "__main__":

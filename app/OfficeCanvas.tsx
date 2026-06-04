@@ -21,10 +21,21 @@ const COLS = 14;
 const ROWS = 11;
 const W = COLS * TILE;
 const H = ROWS * TILE;
-const F = 64; // sprite frame size in the sheets
+const F = 64;
 const DIRS = ["down", "up", "left", "right"] as const;
 type Dir = (typeof DIRS)[number];
-type Frames = { base: Record<Dir, Texture[]>; shirt: Record<Dir, Texture[]> };
+type Layer = "base" | "skin" | "hair" | "shirt";
+const LAYERS: Layer[] = ["base", "skin", "shirt", "hair"]; // draw order
+type Frames = Record<Layer, Record<Dir, Texture[]>>;
+
+// Per-agent skin & hair palettes (deterministic from the agent id).
+const SKIN_TONES = [0xffe0bd, 0xf2c68c, 0xe8b07a, 0xd99a6c, 0xc68642, 0x8d5524];
+const HAIR_COLORS = [0x2b1d12, 0x4a3422, 0x6b4423, 0x141414, 0x5a5a5a, 0xc9a227, 0xaa3322, 0x8a8a8a];
+function hashStr(s: string): number {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
+  return h;
+}
 
 const ROOMS: {
   key: string;
@@ -58,8 +69,7 @@ const STATUS_RING: Record<string, number> = {
 
 type Sprite = {
   container: Container;
-  base: AnimatedSprite;
-  shirt: AnimatedSprite;
+  layers: Record<Layer, AnimatedSprite>;
   ring: Graphics;
   accessory: Text;
   bubble: Container;
@@ -94,15 +104,17 @@ export function OfficeCanvas() {
 
     (async () => {
       await app.init({ width: W, height: H, background: 0x0b0d13, antialias: false });
-      const [baseTex, shirtTex] = await Promise.all([
-        Assets.load<Texture>("/sprites/agent-base.png"),
-        Assets.load<Texture>("/sprites/agent-shirt.png"),
-      ]);
+      const names: Layer[] = ["base", "skin", "hair", "shirt"];
+      const texes = await Promise.all(
+        names.map((n) => Assets.load<Texture>(`/sprites/agent-${n}.png`)),
+      );
       if (disposed) {
         app.destroy(true);
         return;
       }
-      framesRef.current = { base: sliceDirs(baseTex), shirt: sliceDirs(shirtTex) };
+      const frames = {} as Frames;
+      names.forEach((n, i) => (frames[n] = sliceDirs(texes[i])));
+      framesRef.current = frames;
 
       appRef.current = app;
       hostRef.current?.appendChild(app.canvas);
@@ -116,23 +128,20 @@ export function OfficeCanvas() {
           s.container.x += dx * 0.14;
           s.container.y += dy * 0.14;
           const moving = Math.hypot(dx, dy) > 0.6;
+          const all = Object.values(s.layers);
           if (moving) {
             const dir: Dir =
               Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? "right" : "left") : dy > 0 ? "down" : "up";
             if (dir !== s.dir && framesRef.current) {
               s.dir = dir;
-              s.base.textures = framesRef.current.base[dir];
-              s.shirt.textures = framesRef.current.shirt[dir];
-              s.base.gotoAndPlay(0);
-              s.shirt.gotoAndPlay(0);
+              for (const l of LAYERS) {
+                s.layers[l].textures = framesRef.current[l][dir];
+                s.layers[l].gotoAndPlay(0);
+              }
             }
-            if (!s.base.playing) {
-              s.base.play();
-              s.shirt.play();
-            }
-          } else if (s.base.playing) {
-            s.base.gotoAndStop(0);
-            s.shirt.gotoAndStop(0);
+            if (!all[0].playing) all.forEach((sp) => sp.play());
+          } else if (all[0].playing) {
+            all.forEach((sp) => sp.gotoAndStop(0));
           }
         }
       });
@@ -248,13 +257,14 @@ function createSprite(a: Doc<"agents">, frames: Frames): Sprite {
   const ring = new Graphics();
   container.addChild(ring);
 
-  const base = new AnimatedSprite(frames.base.down);
-  const shirt = new AnimatedSprite(frames.shirt.down);
-  for (const sp of [base, shirt]) {
+  const layers = {} as Record<Layer, AnimatedSprite>;
+  for (const l of LAYERS) {
+    const sp = new AnimatedSprite(frames[l].down);
     sp.anchor.set(0.5, 0.95);
     sp.scale.set(0.62);
     sp.animationSpeed = 0.16;
     container.addChild(sp);
+    layers[l] = sp;
   }
 
   const accessory = new Text({
@@ -296,11 +306,16 @@ function createSprite(a: Doc<"agents">, frames: Frames): Sprite {
   bubble.visible = false;
   container.addChild(bubble);
 
-  return { container, base, shirt, ring, accessory, bubble, bubbleText, targetX: 0, targetY: 0, dir: "down" };
+  // Deterministic skin + hair from the agent id.
+  const hash = hashStr(a._id);
+  layers.skin.tint = SKIN_TONES[hash % SKIN_TONES.length];
+  layers.hair.tint = HAIR_COLORS[(hash >> 3) % HAIR_COLORS.length];
+
+  return { container, layers, ring, accessory, bubble, bubbleText, targetX: 0, targetY: 0, dir: "down" };
 }
 
 function paintStatus(s: Sprite, a: Doc<"agents">) {
-  s.shirt.tint = parseInt(a.color.replace("#", "0x")); // only the shirt is tinted
+  s.layers.shirt.tint = parseInt(a.color.replace("#", "0x"));
   const ringColor = STATUS_RING[a.status] ?? 0x64748b;
   s.ring.clear();
   s.ring.ellipse(0, 3, 13, 5).stroke({ color: ringColor, width: 2, alpha: 0.9 });
