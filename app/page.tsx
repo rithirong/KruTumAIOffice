@@ -223,7 +223,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex-1 flex flex-col items-center gap-6 p-8 bg-gradient-to-b from-[#0a0b12] via-[#0c0e16] to-[#10121c] text-slate-200">
+    <main className="flex-1 flex flex-col items-center gap-6 p-4 sm:p-8 bg-gradient-to-b from-[#0a0b12] via-[#0c0e16] to-[#10121c] text-slate-200">
       {hireOpen && <HirePanel onClose={() => setHireOpen(false)} />}
       <header className="text-center">
         <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-amber-300 via-pink-300 to-violet-300 bg-clip-text text-transparent">
@@ -232,8 +232,8 @@ export default function Home() {
         <p className="text-sm text-slate-400 mt-1">บริษัท AI หลายเอเจนต์ในรูปแบบเกม</p>
       </header>
 
-      <div className="flex flex-col lg:flex-row gap-6 items-start">
-        <div className="flex flex-col gap-3">
+      <div className="w-full max-w-5xl flex flex-col lg:flex-row gap-6 items-start">
+        <div className="flex flex-col gap-3 w-full lg:w-auto min-w-0">
           <OfficeCanvas />
 
           {/* แผงควบคุม */}
@@ -310,7 +310,7 @@ export default function Home() {
           )}
         </div>
 
-        <aside className="w-80 flex flex-col gap-4">
+        <aside className="w-full lg:w-80 flex flex-col gap-4">
           {/* พนักงาน */}
           <section>
             <h2 className="text-xs uppercase tracking-wider text-slate-400 mb-2">

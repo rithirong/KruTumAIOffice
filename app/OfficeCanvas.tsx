@@ -183,8 +183,8 @@ export function OfficeCanvas() {
   return (
     <div
       ref={hostRef}
-      style={{ width: W, height: H }}
-      className="rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10"
+      style={{ width: "100%", maxWidth: W, aspectRatio: `${W} / ${H}` }}
+      className="rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10 [&>canvas]:block [&>canvas]:!w-full [&>canvas]:!h-full"
     />
   );
 }
