@@ -21,9 +21,10 @@ const COLS = 14;
 const ROWS = 11;
 const W = COLS * TILE;
 const H = ROWS * TILE;
-const F = 48; // sprite frame size in the sheet
+const F = 64; // sprite frame size in the sheets
 const DIRS = ["down", "up", "left", "right"] as const;
 type Dir = (typeof DIRS)[number];
+type Frames = { base: Record<Dir, Texture[]>; shirt: Record<Dir, Texture[]> };
 
 const ROOMS: {
   key: string;
@@ -57,7 +58,8 @@ const STATUS_RING: Record<string, number> = {
 
 type Sprite = {
   container: Container;
-  sprite: AnimatedSprite;
+  base: AnimatedSprite;
+  shirt: AnimatedSprite;
   ring: Graphics;
   accessory: Text;
   bubble: Container;
@@ -67,11 +69,22 @@ type Sprite = {
   dir: Dir;
 };
 
+function sliceDirs(tex: Texture): Record<Dir, Texture[]> {
+  tex.source.scaleMode = "nearest";
+  const out = {} as Record<Dir, Texture[]>;
+  DIRS.forEach((d, r) => {
+    out[d] = [0, 1, 2, 3].map(
+      (c) => new Texture({ source: tex.source, frame: new Rectangle(c * F, r * F, F, F) }),
+    );
+  });
+  return out;
+}
+
 export function OfficeCanvas() {
   const agents = useQuery(api.agents.list);
   const hostRef = useRef<HTMLDivElement>(null);
   const appRef = useRef<Application | null>(null);
-  const framesRef = useRef<Record<Dir, Texture[]> | null>(null);
+  const framesRef = useRef<Frames | null>(null);
   const spritesRef = useRef<Map<string, Sprite>>(new Map());
   const [ready, setReady] = useState(false);
 
@@ -81,27 +94,21 @@ export function OfficeCanvas() {
 
     (async () => {
       await app.init({ width: W, height: H, background: 0x0b0d13, antialias: false });
-      const tex = await Assets.load<Texture>("/sprites/agent.png");
-      tex.source.scaleMode = "nearest"; // keep pixels crisp
+      const [baseTex, shirtTex] = await Promise.all([
+        Assets.load<Texture>("/sprites/agent-base.png"),
+        Assets.load<Texture>("/sprites/agent-shirt.png"),
+      ]);
       if (disposed) {
         app.destroy(true);
         return;
       }
-      // Slice the sheet into per-direction walk frames.
-      const frames = {} as Record<Dir, Texture[]>;
-      DIRS.forEach((d, r) => {
-        frames[d] = [0, 1, 2, 3].map(
-          (c) => new Texture({ source: tex.source, frame: new Rectangle(c * F, r * F, F, F) }),
-        );
-      });
-      framesRef.current = frames;
+      framesRef.current = { base: sliceDirs(baseTex), shirt: sliceDirs(shirtTex) };
 
       appRef.current = app;
       hostRef.current?.appendChild(app.canvas);
       drawFloor(app);
       setReady(true);
 
-      // Walk toward target tile; play walk animation + face movement direction.
       app.ticker.add(() => {
         for (const s of spritesRef.current.values()) {
           const dx = s.targetX - s.container.x;
@@ -114,12 +121,18 @@ export function OfficeCanvas() {
               Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? "right" : "left") : dy > 0 ? "down" : "up";
             if (dir !== s.dir && framesRef.current) {
               s.dir = dir;
-              s.sprite.textures = framesRef.current[dir];
-              s.sprite.gotoAndPlay(0);
+              s.base.textures = framesRef.current.base[dir];
+              s.shirt.textures = framesRef.current.shirt[dir];
+              s.base.gotoAndPlay(0);
+              s.shirt.gotoAndPlay(0);
             }
-            if (!s.sprite.playing) s.sprite.play();
-          } else if (s.sprite.playing) {
-            s.sprite.gotoAndStop(0);
+            if (!s.base.playing) {
+              s.base.play();
+              s.shirt.play();
+            }
+          } else if (s.base.playing) {
+            s.base.gotoAndStop(0);
+            s.shirt.gotoAndStop(0);
           }
         }
       });
@@ -176,12 +189,11 @@ export function OfficeCanvas() {
   );
 }
 
-// ── furniture ──
 function deskWithMonitor(g: Graphics, cx: number, cy: number, screen: number) {
   g.roundRect(cx - 17, cy - 6, 34, 13, 3).fill({ color: 0x2a2f44 }).stroke({ color: 0x3c4258, width: 1, alpha: 0.6 });
   g.roundRect(cx - 8, cy - 16, 16, 11, 2).fill({ color: 0x0e121c });
   g.roundRect(cx - 6, cy - 14, 12, 7, 1).fill({ color: screen, alpha: 0.85 });
-  g.circle(cx, cy + 11, 3).fill({ color: 0x242a3c }); // chair
+  g.circle(cx, cy + 11, 3).fill({ color: 0x242a3c });
 }
 
 function drawFloor(app: Application) {
@@ -198,20 +210,16 @@ function drawFloor(app: Application) {
       .stroke({ color: 0xffffff, width: 1.5, alpha: 0.08 });
   }
 
-  // Meeting room: long table + chairs.
   g.roundRect(5.2 * TILE, 1.9 * TILE, 3.6 * TILE, 1.1 * TILE, 8).fill({ color: 0x39314f });
   for (let i = 0; i < 4; i++) {
     g.circle((5.6 + i * 0.9) * TILE, 1.6 * TILE, 5).fill({ color: 0x2a2440 });
     g.circle((5.6 + i * 0.9) * TILE, 3.3 * TILE, 5).fill({ color: 0x2a2440 });
   }
-  // Classroom: whiteboard.
   g.roundRect(11.3 * TILE, 1.3 * TILE, 2.4 * TILE, 0.45 * TILE, 3).fill({ color: 0xe8edf5 }).stroke({ color: 0x9aa3b5, width: 1 });
   deskWithMonitor(g, 12.5 * TILE, 3.1 * TILE, 0xec4899);
-  // Dev room: desks with blue screens.
   deskWithMonitor(g, 2.3 * TILE, 7.4 * TILE, 0x3b82f6);
   deskWithMonitor(g, 4.4 * TILE, 7.4 * TILE, 0x22c55e);
   deskWithMonitor(g, 2.3 * TILE, 9.2 * TILE, 0x8b5cf6);
-  // Trading floor: desk with green/red screens.
   deskWithMonitor(g, 9.4 * TILE, 7.4 * TILE, 0x16a34a);
   deskWithMonitor(g, 11.6 * TILE, 7.4 * TILE, 0xef4444);
   deskWithMonitor(g, 10.5 * TILE, 9.2 * TILE, 0xeab308);
@@ -230,28 +238,31 @@ function drawFloor(app: Application) {
   }
 }
 
-function createSprite(a: Doc<"agents">, frames: Record<Dir, Texture[]>): Sprite {
+function createSprite(a: Doc<"agents">, frames: Frames): Sprite {
   const container = new Container();
 
   const shadow = new Graphics();
-  shadow.ellipse(0, 4, 12, 4).fill({ color: 0x000000, alpha: 0.35 });
+  shadow.ellipse(0, 3, 12, 4).fill({ color: 0x000000, alpha: 0.35 });
   container.addChild(shadow);
 
   const ring = new Graphics();
   container.addChild(ring);
 
-  const sprite = new AnimatedSprite(frames.down);
-  sprite.anchor.set(0.5, 0.95);
-  sprite.scale.set(0.82);
-  sprite.animationSpeed = 0.16;
-  container.addChild(sprite);
+  const base = new AnimatedSprite(frames.base.down);
+  const shirt = new AnimatedSprite(frames.shirt.down);
+  for (const sp of [base, shirt]) {
+    sp.anchor.set(0.5, 0.95);
+    sp.scale.set(0.62);
+    sp.animationSpeed = 0.16;
+    container.addChild(sp);
+  }
 
   const accessory = new Text({
     text: "",
     style: new TextStyle({ fontSize: 13, fontFamily: "Tahoma, sans-serif" }),
   });
   accessory.anchor.set(0.5);
-  accessory.position.set(11, -36);
+  accessory.position.set(12, -34);
   container.addChild(accessory);
 
   const name = new Text({
@@ -283,17 +294,16 @@ function createSprite(a: Doc<"agents">, frames: Record<Dir, Texture[]>): Sprite 
   bubble.addChild(bubbleBg);
   bubble.addChild(bubbleText);
   bubble.visible = false;
-  bubble.y = -48;
   container.addChild(bubble);
 
-  return { container, sprite, ring, accessory, bubble, bubbleText, targetX: 0, targetY: 0, dir: "down" };
+  return { container, base, shirt, ring, accessory, bubble, bubbleText, targetX: 0, targetY: 0, dir: "down" };
 }
 
 function paintStatus(s: Sprite, a: Doc<"agents">) {
-  s.sprite.tint = parseInt(a.color.replace("#", "0x"));
+  s.shirt.tint = parseInt(a.color.replace("#", "0x")); // only the shirt is tinted
   const ringColor = STATUS_RING[a.status] ?? 0x64748b;
   s.ring.clear();
-  s.ring.ellipse(0, 4, 13, 5).stroke({ color: ringColor, width: 2, alpha: 0.9 });
+  s.ring.ellipse(0, 3, 13, 5).stroke({ color: ringColor, width: 2, alpha: 0.9 });
 
   s.accessory.text = ROLE_ICON[a.role] ?? "🙂";
 
@@ -309,7 +319,7 @@ function paintStatus(s: Sprite, a: Doc<"agents">) {
     bg.clear();
     bg.roundRect(-w / 2, 0, w, h, 8).fill(0xffffff);
     bg.moveTo(-4, h).lineTo(4, h).lineTo(0, h + 6).fill(0xffffff);
-    s.bubble.y = -(h + 26);
+    s.bubble.y = -(h + 44);
     s.bubble.visible = true;
   } else {
     s.bubble.visible = false;
